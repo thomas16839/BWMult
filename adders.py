@@ -146,22 +146,11 @@ class Matrix:
 
     def solve(self):
         self.shift_grid()
-        self.print_debug()
-
         while not self.finished():
             self.place_adders()
             self.shift_grid()
             self.cur_layer += 1
-
-        self.print_debug()
         print("done")
-
-    def print_debug(self):
-        print(self.grid)
-
-        f = open(f"{self.cur_layer}.txt", 'w')
-        np.savetxt(f, self.grid, fmt='%10s')
-        f.close()
 
     def print_signals(self, file):
         layer = 0
