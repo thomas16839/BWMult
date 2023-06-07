@@ -4,7 +4,7 @@ import adders
 import sys
 
 if __name__ == '__main__':
-    f = open('32_bit_example.vhd', 'w')
+    f = open('mulitplier.vhd', 'w')
 
     try:
         width = int(sys.argv[1])
