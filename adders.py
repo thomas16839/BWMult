@@ -187,9 +187,9 @@ class Matrix:
         zero = "'0'"
         file.write("    --product\n")
         for (p, i) in zip(prod, range(len(prod) - 1, -1, -1)):
-            file.write(f"   p({i}) <= {p};\n")
+            file.write(f"   x({i}) <= {p};\n")
         file.write("    --carry\n")
         for (c, i) in zip(carry, range(len(carry) - 1, -1, -1)):
-            file.write(f"   c({i}) <= {c if c != '' else zero};\n")
+            file.write(f"   y({i}) <= {c if c != '' else zero};\n")
 
         file.write("end behaviour;\n")
