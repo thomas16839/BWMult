@@ -7,6 +7,8 @@ def print_signals(file, width):
                f');\n'
                f'end {name};\n\n'
                f'architecture behaviour of {name} is\n')
+    
+    file.write('--partial product signals\n')
 
     for i in range(width):
         file.write(f'   signal pp{i} : std_logic_vector({width-1} downto 0);\n')

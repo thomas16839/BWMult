@@ -1,10 +1,11 @@
-def write_header(file):
+def write_header(file, width):
     file.write(f'----------------------------------------------\n'
                f'-- AUTOMATICALLY GENERATED, DO NOT EDIT     --\n'
                f'-- in case of mistakes, edit the            --\n'
                f'-- generator script                         --\n'
                f'--                                          --\n'
                f'-- TITLE: Baugh Wooley Multiplier Reduction --\n'
+               f'-- INPUT WIDTH: {width} Bits                --\n'
                f'-- AUTHOR: Thomas Pouwels                   --\n'
                f'----------------------------------------------\n'
                f'\n'
