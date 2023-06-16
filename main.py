@@ -4,6 +4,8 @@ import adders
 import sys
 
 if __name__ == '__main__':
+    debug = False
+
     try:
         width = int(sys.argv[1])
     except:
@@ -16,7 +18,7 @@ if __name__ == '__main__':
     partial_products.print_signals(f, width)
 
     # initialise the grid and solve it
-    fa = adders.Matrix(width)
+    fa = adders.Matrix(width, debug)
     fa.solve()
 
     # now use the results to finish the vhdl

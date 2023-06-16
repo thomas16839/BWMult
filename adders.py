@@ -37,8 +37,9 @@ class HalfAdder:
 
 
 class Matrix:
-    def __init__(self, width):
+    def __init__(self, width, debug):
         self.grid, self.width, self.height = self.init_grid(width)
+        self.debug = debug
         self.cur_layer = 0
         self.full_adders = []
         self.half_adders = []
@@ -132,6 +133,7 @@ class Matrix:
             inputs = [self.grid[0, i], self.grid[1, i]]
             new_ha.append(HalfAdder(self.cur_layer, adder_id, inputs))
             s, c = new_ha[-1].as_input()
+            # this is safe since the bit at location [1, i - 1] is an input to a halfadder as well and needs to be removed
             self.grid[0, i] = s
             self.grid[1, i - 1] = c
             adder_id += 1
@@ -142,14 +144,17 @@ class Matrix:
         s, c = self.full_adders[-1].as_input()
         self.grid[0, loc] = s
         self.grid[1, loc - 1] = c
+        self.grid[1, loc] = ""
         self.grid[2, loc] = ""
 
     def solve(self):
+        self.print_debug()
         self.shift_grid()
         while not self.finished():
             self.place_adders()
             self.shift_grid()
             self.cur_layer += 1
+            self.print_debug()
         print("done")
 
     def print_signals(self, file):
@@ -193,3 +198,10 @@ class Matrix:
             file.write(f"   y({i}) <= {c if c != '' else zero};\n")
 
         file.write("end behaviour;\n")
+
+    def print_debug(self):
+        if self.debug:
+            f = open(f"{self.cur_layer}.txt", 'w')
+            np.savetxt(f, self.grid, fmt='%10s')
+            f.close()
+
